@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+  background-color: #a6d49f;
+}
+
+.navbar {
+  background-color: #9CB380 !important;
+}
+.navbar .container-fluid {
+  width: auto;
+}
+
+.all-notes {
+  margin: auto;
+  width: 70%;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  box-sizing: border-box;
+  background-color: #9CB380;
+}
+
+main h1 {
+  margin: auto;
+  width: fit-content;
+  border: 1px #522A27;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  text-align: center;
+  font-size: 36px;
+}
+main section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+main section .note {
+  width: fit-content;
+  padding: 16px 36px;
+}
+
+/*# sourceMappingURL=index.css.map */

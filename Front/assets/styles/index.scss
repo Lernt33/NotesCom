@@ -1,0 +1,42 @@
+@use "var.scss" as *;
+
+body{
+    margin: 0;
+    background-color: $primary-color;
+}
+.navbar{
+    background-color: $secondary-color !important;
+    .container-fluid{
+        width: auto;
+        // color: $text-color !important;
+    }
+}
+.all-notes{
+    margin: auto;
+    width: 70%;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    box-sizing: border-box;
+    background-color: $secondary-color;
+}
+main {
+    h1{
+        margin: auto;
+        width: fit-content;
+        border: 1px  $text-color;
+        margin-top: 16px;
+        margin-bottom: 16px;
+        text-align: center;
+        font-size: 36px;
+    }
+    section{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .note{
+            width: fit-content;
+            padding: 16px 36px;
+        }
+    }
+
+}
