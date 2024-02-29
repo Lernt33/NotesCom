@@ -10,13 +10,20 @@ body {
   width: auto;
 }
 
+.dropdown-menu.show {
+  background-color: #C59849 !important;
+}
+.dropdown-menu.show a:hover {
+  background-color: #C59849;
+}
+
 .all-notes {
   margin: auto;
   width: 70%;
   padding-top: 16px;
   padding-bottom: 16px;
   box-sizing: border-box;
-  background-color: #9CB380;
+  background-color: #8DA86D;
 }
 
 main h1 {
