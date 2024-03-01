@@ -1,0 +1,20 @@
+@use "var" as *;
+@mixin default(){
+    body{
+        margin: 0;
+        background-color: $primary-color;
+    }
+    .navbar{
+        background-color: $secondary-color !important;
+        .container-fluid{
+            width: auto;
+            // color: $text-color !important;
+        }
+    }
+    .dropdown-menu.show {
+        background-color: $yellow-color !important;
+        a:hover{
+            background-color: $yellow-color;
+        }
+    }
+}
