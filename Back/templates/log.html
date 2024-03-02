@@ -12,10 +12,18 @@
     />
     <link rel="stylesheet" href="../static/assets/styles/forms.css" />
     <link rel="shortcut icon" href="../static/assets/images" type="image/x-icon" />
+      <style> .bad{
+          width: fit-content;
+          margin: auto;
+          background-color: red;
+      }</style>
   </head>
   <body>
     {% include 'base.html' %}
     <main>
+        {% for cat,i in get_flashed_messages(with_categories=true) %}
+        <div class="{{ cat }}">{{ i }}</div>
+        {% endfor %}
       <h1>Login</h1>
       <form class="form" method="post" action="">
         <div class="mb-3">

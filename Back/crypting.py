@@ -22,3 +22,5 @@ class CryptingAlgorithm():
         return self.encoding() == other
     def __str__(self):
         return self.__word
+# print(CryptingAlgorithm("admin").encoding())
+# print(CryptingAlgorithm("admin")=='2619,3000,4251,3675,4400')

@@ -29,13 +29,13 @@
                   My Account
                 </a>
                 <ul class="dropdown-menu">
-                    {% if admin %}
+                    {% if session['logged'] == 'admin@admin' %}
                   <li><a class="dropdown-item" href="{{ url_for('admin') }}">Admin-Panel</a></li>
                   <li><hr class="dropdown-divider" /></li>
                   <li>
                     <a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a>
                   </li>
-                    {% elif user %}
+                    {% elif session['logged'] %}
                   <li><hr class="dropdown-divider" /></li>
                   <li>
                     <a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a>

@@ -28,6 +28,7 @@
             class="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
+            required
           />
           <div id="emailHelp" class="form-text">
             We'll never share your email with anyone else.
@@ -40,6 +41,7 @@
             type="password"
             class="form-control"
             id="exampleInputPassword1"
+            required
           />
         </div>
         <div class="mb-3">
@@ -51,6 +53,7 @@
             type="password"
             class="form-control"
             id="exampleInputPassword1"
+            required
           />
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -59,7 +62,7 @@
     <script>
       function submitToOtherUrl() {
         // Change the form action to the other URL
-        document.getElementById("myForm").action = "/Delete";
+        document.getElementById("myForm").action = "/delete";
 
         // Submit the form
         document.getElementById("myForm").submit();
