@@ -33,8 +33,22 @@ class DataBase():
                 return True
         except Exception as e:
             return False
+    def get_id(self,email):
+        with sqlite3.connect(self.__db) as conn:
+            cur = conn.cursor()
+            cur.execute(f'SELECT id FROM users WHERE email="{email}"')
+            result = str(cur.fetchone()[0])
+        print(result)
+        return result
+    def exist_id(self,id):
+        with sqlite3.connect(self.__db) as conn:
+            cur = conn.cursor()
+            cur.execute(f'SELECT count(id) AS TOTAL FROM users WHERE id="{id}"')
+            result = cur.fetchone()[0]
+        if result == 0: return False
+        return True
 
-db = DataBase('db.db')
+# db = DataBase('db.db')
 # print(db.check_email("admin@admin"))
 # print(db.register_user("lox@lox1","1234"))
-print(db.login_user("lox@lox1","1234"))
+# print(db.login_user("lox@lox1","1234"))

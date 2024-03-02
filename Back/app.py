@@ -38,6 +38,9 @@ def language_and_redirect():
     response.set_cookie('language', preferred_language)
     return response
 
+@app.errorhandler(404)
+def error(e):
+    return '<style>body{background-color: green;h1{margin: auto;width: fit-content;}}</style><h1>Page not found</h1>',404
 ####################################################################################################
 @app.route('/')
 def index():
@@ -50,6 +53,13 @@ def mynotes():
         return redirect(url_for('log'))
     return render_template('mynotes.html')
 
+@app.route('/profile/<id>')
+def profile(id):
+    if db.get_id(session['logged']) == str(id):
+        return redirect(url_for('mynotes'))
+    if db.exist_id(id):
+        return f'profile for {id}'
+    return '404',404
 @app.route('/reg',methods=['GET','POST'])
 def register():
     if request.method == 'POST':
@@ -58,7 +68,7 @@ def register():
                 session['logged'] = request.form['email']
                 return redirect(url_for('index'))
             else:
-                flash("Такой email уже зарегестрирован",'bad')
+                flash("This mail is already registered",'bad')
         else:
             flash('пароли не совпадают','bad')
     return render_template('reg.html')
