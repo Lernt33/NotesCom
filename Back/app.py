@@ -6,8 +6,8 @@ import database,crypting
 app = Flask(__name__)
 app.config["SECRET_KEY"] = '9d9c6cb95afbc68b20c4fc3257f7bbe4dc7963fb'
 app.permanent_session_lifetime = datetime.timedelta(days=90)
-
 db =database.DataBase("db.db")
+
 
 dict = {'/':'index','/mynotes':'mynotes','/reg':'register','/log':'log','/logout':'logout','/admin':'admin'
         ,'/mynotes/':'mynotes','/reg/':'register','/log/':'log','/logout/':'logout','/admin/':'admin'
@@ -42,10 +42,19 @@ def language_and_redirect():
 def error(e):
     return '<style>body{background-color: green;h1{margin: auto;width: fit-content;}}</style><h1>Page not found</h1>',404
 ####################################################################################################
-@app.route('/')
+@app.route('/',methods=['GET','POST'])
 def index():
+    if request.method == 'POST':
+        if 'logged' in session:
+            db.insert_notes(session['logged'],request.form['note'])
+            flash('Successfully added','succes')
+            return redirect(url_for('index'))
+        else:
+            flash("You have not logged in","warning")
+            return redirect(url_for('index'))
     # if session['logged_in']:
-    return render_template('index.html')
+    # print(db.get_notes())
+    return render_template('index.html',notes=db.get_notes())
 @app.route('/mynotes')
 def mynotes():
     if not 'logged' in session:

@@ -16,14 +16,23 @@
   <body>
 {% include 'base.html' %}
     <main>
+    <form class="insert_note" method="post" action="">
+        <label for="note1">Type your note here:</label>
+        <textarea class="" maxlength="100" type="text" name="note" id="note1" required oninvalid="this.setCustomValidity('Enter text please!')">
+</textarea>
+        <input type="submit" value="submit">
+    </form>
       <h1>All notes here:</h1>
       <section class="all-notes">
-        <div class="note" style="background-color: #a6d49f">
-          <p>Just some Note with some staff</p>
-          <a href="#">By Author</a>
-          <div class="divider"></div>
-        </div>
-      </section>
+          {% for i in notes %}
+{#              <p>{{ i }}</p>#}
+              <div class="note" style="background-color: #a6d49f">
+              <p>{{ i[1] }}</p>
+              <a href="profile/{{ i[0] }}">By {{ i[3] }}</a>
+              <div class="divider"></div>
+              </div>
+          {% endfor %}
+    </section>
     </main>
     <footer><a href="https://github.com/Lernt33">Made by Lernt</a></footer>
     <script

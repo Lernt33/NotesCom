@@ -47,6 +47,17 @@ class DataBase():
             result = cur.fetchone()[0]
         if result == 0: return False
         return True
+    def get_notes(self):
+        with sqlite3.connect(self.__db) as conn:
+            cur = conn.cursor()
+            cur.execute(f'SELECT notes.*,users.email FROM users JOIN notes ON users.id = notes.id ORDER BY id DESC ')
+            result = cur.fetchall()
+        return result
+    def insert_notes(self,email,note):
+        with sqlite3.connect(self.__db) as conn:
+            cur = conn.cursor()
+            cur.execute(f'INSERT INTO notes (id,note,date) SELECT users.id,"{note}","{datetime.today().date()}" FROM users WHERE users.email="{email}";')
+        return True
 
 # db = DataBase('db.db')
 # print(db.check_email("admin@admin"))

@@ -26,6 +26,23 @@ body {
   background-color: #8DA86D;
 }
 
+main .insert_note {
+  max-width: fit-content;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: 400px;
+  height: 100%;
+}
+main .insert_note textarea {
+  overflow: hidden;
+  resize: none;
+  height: 7rem;
+  min-width: 17rem;
+  width: 70%;
+  background-color: #9CB380;
+}
 main h1 {
   margin: auto;
   width: fit-content;
@@ -73,7 +90,7 @@ main section .note a {
 
 footer {
   background-color: rgba(197, 152, 73, 0.5);
-  position: absolute;
+  position: sticky;
   bottom: 0%;
   width: 100%;
   display: flex;
