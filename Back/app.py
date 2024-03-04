@@ -54,13 +54,14 @@ def index():
             return redirect(url_for('index'))
     # if session['logged_in']:
     # print(db.get_notes())
-    return render_template('index.html',notes=db.get_notes())
+    return render_template('index.html',notes=db.get_notes()[::-1])
 @app.route('/mynotes')
 def mynotes():
     if not 'logged' in session:
         flash('You are not logged in','bad')
         return redirect(url_for('log'))
-    return render_template('mynotes.html')
+    print(db.get_notes_by_email(session['logged']))
+    return render_template('mynotes.html',notes=db.get_notes_by_email(session['logged'])[::-1])
 
 @app.route('/profile/<id>')
 def profile(id):

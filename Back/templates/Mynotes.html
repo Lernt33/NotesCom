@@ -18,10 +18,13 @@
     <main>
       <h1>All Your notes here:</h1>
       <section class="all-notes">
-        <form id="myForm" class="note" action="" method="POST">
-          <label for="editor">#1</label><br />
-          <textarea id="editor" class="" name="editor" rows="4" cols="50">
-Enter your text here</textarea
+        {% if notes=="no"[::-1] %}
+            <h1>You have no notes!</h1>
+      {% else %}
+            {% for i in notes %}
+        <form id="myForm" class="note" action="/edit/{{ i[3] }}" method="POST">
+          <label for="editor">#Edit note:</label><br />
+          <textarea id="editor" class="" name="editor" rows="4" cols="50">{{ i[1] }}</textarea
           ><br />
           <div class="form-buttons">
             <input type="submit" value="Submit editing" />
@@ -30,12 +33,14 @@ Enter your text here</textarea
             </button>
           </div>
         </form>
+          {% endfor %}
+      {% endif %}
       </section>
     </main>
     <script>
       function submitToOtherUrl() {
         // Change the form action to the other URL
-        document.getElementById("myForm").action = "/Delete";
+        document.getElementById("myForm").action = "/delete";
 
         // Submit the form
         document.getElementById("myForm").submit();
