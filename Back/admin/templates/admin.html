@@ -16,10 +16,10 @@
   <body>
     {% include 'base.html' %}
     <main>
-      <h1>All Your notes here:</h1>
+      <h1>All notes here:</h1>
       <section class="all-notes">
         {% if notes=="no"[::-1] %}
-            <h1>You have no notes!</h1>
+            <h1>There are no notes!</h1>
       {% else %}
             {% for i in notes %}
         <form id="myForm" class="note" action="/edit/{{ i[3] }}" method="POST">

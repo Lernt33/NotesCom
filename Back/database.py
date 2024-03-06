@@ -67,9 +67,18 @@ class DataBase():
             return result
         return "no"
 
+    def get_all_notes(self):
+        with sqlite3.connect(self.__db) as conn:
+            cur = conn.cursor()
+            cur.execute(
+                f'SELECT notes.*,users.email FROM users JOIN notes ON users.id = notes.id')
+            result = cur.fetchall()
+        if len(result) > 0:
+            return result
+        return "no"
         # return False ['None1','There are no notes','None1','None1']
-db = DataBase('db.db')
-print(db.get_notes_by_email('user@gmail.com'))
+# db = DataBase('db.db')
+# print(db.get_all_notes())
 # print(db.check_email("admin@admin"))
 # print(db.register_user("lox@lox1","1234"))
 # print(db.login_user("lox@lox1","1234"))

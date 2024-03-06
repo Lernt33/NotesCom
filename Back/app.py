@@ -1,12 +1,12 @@
 from flask import Flask,render_template,url_for,request,redirect,flash,session,make_response
-import datetime,sqlite3
-# import additional_scripts.database
-import database,crypting
-
+import datetime,database
+from admin.admin import admin
 app = Flask(__name__)
 app.config["SECRET_KEY"] = '9d9c6cb95afbc68b20c4fc3257f7bbe4dc7963fb'
 app.permanent_session_lifetime = datetime.timedelta(days=90)
 db =database.DataBase("db.db")
+app.register_blueprint(admin, url_prefix='/admin')
+
 
 
 dict = {'/':'index','/mynotes':'mynotes','/reg':'register','/log':'log','/logout':'logout','/admin':'admin'
