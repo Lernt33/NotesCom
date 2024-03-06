@@ -22,8 +22,9 @@
             <h1>There are no notes!</h1>
       {% else %}
             {% for i in notes %}
-        <form id="myForm" class="note" action="/edit/{{ i[3] }}" method="POST">
-          <label for="editor">#Edit note:</label><br />
+        <form id="myForm" class="note" action="/edit/{{ i[3] }}" method="get">
+            <input style="display: none" type="radio" name="noteid" value="{{ i[3] }}" checked>
+          <label for="editor">#by {{ i[4] }}:</label><br />
           <textarea id="editor" class="" name="editor" rows="4" cols="50">{{ i[1] }}</textarea
           ><br />
           <div class="form-buttons">

@@ -3,6 +3,18 @@ body {
   background-color: #a6d49f;
 }
 
+.warning {
+  width: fit-content !important;
+  margin: auto !important;
+  background-color: red !important;
+}
+
+.success {
+  width: fit-content;
+  margin: auto;
+  background-color: green;
+}
+
 .navbar {
   background-color: #9CB380 !important;
 }

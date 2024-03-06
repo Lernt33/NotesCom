@@ -58,10 +58,12 @@ def index():
 @app.route('/mynotes')
 def mynotes():
     if not 'logged' in session:
-        flash('You are not logged in','bad')
+        flash('You are not logged in','warning')
         return redirect(url_for('log'))
-    print(db.get_notes_by_email(session['logged']))
-    return render_template('mynotes.html',notes=db.get_notes_by_email(session['logged'])[::-1])
+    # print(db.get_notes_by_email(session['logged']))
+    resp = make_response(render_template('mynotes.html',notes=db.get_notes_by_email(session['logged'])[::-1]))
+    resp.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    return resp
 
 @app.route('/profile/<id>')
 def profile(id):
@@ -78,9 +80,9 @@ def register():
                 session['logged'] = request.form['email']
                 return redirect(url_for('index'))
             else:
-                flash("This mail is already registered",'bad')
+                flash("This mail is already registered",'warning')
         else:
-            flash('пароли не совпадают','bad')
+            flash('пароли не совпадают','warning')
     return render_template('reg.html')
 
 @app.route('/log',methods=['GET','POST'])
@@ -89,7 +91,7 @@ def log():
         if db.login_user(request.form['email'], request.form['pasw']):
             session['logged'] = request.form['email']
             return redirect(url_for('index'))
-        flash("Incorrect user or password!",'bad!')
+        flash("Incorrect user or password!",'warning!')
     return render_template('log.html')
 
 @app.route('/logout')
@@ -97,9 +99,14 @@ def logout():
     del session['logged']
     session['visit'] = False
     return redirect(url_for('index'))
-@app.route('/admin')
-def admin():
-    return render_template('AdminPanel.html')
 
+@app.route('/edit/<var>',methods=['GET'])
+def edit(var):
+    if session['logged'] == db.get_email_by_noteid(var):
+        if db.update_note(var,request.args['editor']):
+            flash('Edited successfully','success')
+            return redirect(url_for('index'))
+    flash('Something went wrong','bad')
+    return redirect(url_for('mynotes'))
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)

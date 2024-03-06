@@ -50,7 +50,7 @@ class DataBase():
     def get_notes(self):
         with sqlite3.connect(self.__db) as conn:
             cur = conn.cursor()
-            cur.execute(f'SELECT notes.id,notes.note,notes.date,users.email FROM users JOIN notes ON users.id = notes.id')
+            cur.execute(f'SELECT notes.id,notes.note,notes.date,users.email,notes.noteid FROM users JOIN notes ON users.id = notes.id')
             result = cur.fetchall()
         return result
     def insert_notes(self,email,note):
@@ -77,8 +77,24 @@ class DataBase():
             return result
         return "no"
         # return False ['None1','There are no notes','None1','None1']
+    def get_email_by_noteid(self,noteid):
+        try:
+            with sqlite3.connect(self.__db) as conn:
+                cur = conn.cursor()
+                cur.execute(f'SELECT users.email FROM users JOIN notes ON users.id = notes.id WHERE Noteid={noteid}')
+                result = cur.fetchone()[0]
+            return result
+        except Exception:
+            return None
+    def update_note(self,noteid,new_note):
+        try:
+            with sqlite3.connect(self.__db) as conn:
+                cur = conn.cursor()
+                cur.execute(f"UPDATE notes SET note='{new_note}' WHERE Noteid={noteid}")
+        except Exception:
+            return None
 # db = DataBase('db.db')
-# print(db.get_all_notes())
+# print(db.get_email_by_noteid('4'))
 # print(db.check_email("admin@admin"))
 # print(db.register_user("lox@lox1","1234"))
 # print(db.login_user("lox@lox1","1234"))
