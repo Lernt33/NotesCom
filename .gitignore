@@ -1,5 +1,6 @@
 Copy
 flaskproject
-Back/__pycache__
-Back/.idea
-Back/.venv
+# Back/__pycache__
+# Back/.idea
+# Back/.venv
+Back/
