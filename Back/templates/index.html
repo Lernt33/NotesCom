@@ -14,6 +14,9 @@
     <link rel="shortcut icon" href="../static/assets/images" type="image/x-icon" />
   </head>
   <body>
+          {% for cat,i in get_flashed_messages(with_categories=true) %}
+        <div class="{{ cat }}">{{ i }}</div>
+        {% endfor %}
 {% include 'base.html' %}
     <main>
     <form class="insert_note" method="post" action="">

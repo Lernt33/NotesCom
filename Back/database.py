@@ -9,6 +9,10 @@ class DataBase():
     def __init__(self,db):
         self.__db = f'{db}'
         print(self.__db)
+    def __str__(self):
+        return f'{self.__db}'
+    def exanple(self):
+        return True
     def check_email(self,email):
         with sqlite3.connect(self.__db) as conn:
             cur = conn.cursor()
@@ -91,8 +95,17 @@ class DataBase():
             with sqlite3.connect(self.__db) as conn:
                 cur = conn.cursor()
                 cur.execute(f"UPDATE notes SET note='{new_note}' WHERE Noteid={noteid}")
+            return True
         except Exception:
-            return None
+            return False
+    def delete_by_noteid(self,noteid):
+        try:
+            with sqlite3.connect(self.__db) as conn:
+                cur = conn.cursor()
+                cur.execute(f"Delete from notes WHERE Noteid={noteid}")
+            return True
+        except Exception:
+            return False
 # db = DataBase('db.db')
 # print(db.get_email_by_noteid('4'))
 # print(db.check_email("admin@admin"))

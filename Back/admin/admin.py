@@ -1,7 +1,6 @@
 # admin/admin.py
 import os
 import sqlite3
-
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 
 
